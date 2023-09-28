@@ -11,7 +11,7 @@ export const likepost = async(req,res) =>{
             message: "Login first"
         })
     }
-    const decoded = jwt.verify(token, "hjdfkhdshdsdkhah");
+    const decoded = jwt.verify(token, process.env.SECRATE_TOKEN);
     const user = await User.findById({_id: decoded._id});
     const post = await Post.findById({_id: postid})
     if(!post){

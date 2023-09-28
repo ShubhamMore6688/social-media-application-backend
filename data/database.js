@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 
-export const database = () => mongoose.connect("mongodb://127.0.0.1:27017", {dbName: "socialmedia"}).then(()=>{
+const connectDB = () => mongoose.connect(process.env.DATABASE_URL, {dbName: "socialmedia"}).then(()=>{
     console.log("database connected");
 });
+
+
+export default connectDB;

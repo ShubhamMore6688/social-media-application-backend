@@ -11,7 +11,7 @@ export const createPost = async(req,res) => {
         })
     }
 
-    const decoded = jwt.verify(token, "hjdfkhdshdsdkhah" );
+    const decoded = jwt.verify(token, process.env.SECRATE_TOKEN );
    
     const user = await User.findById({_id: decoded._id});
 
@@ -42,7 +42,7 @@ export const getAllPosts = async(req,res) =>{
         })
     }
 
-    const decoded = jwt.verify(token, "hjdfkhdshdsdkhah" );
+    const decoded = jwt.verify(token, process.env.SECRATE_TOKEN );
     const user = await User.findById({_id: decoded._id});
     const post = await Post.find({user: user._id});
 

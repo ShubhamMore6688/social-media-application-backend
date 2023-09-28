@@ -14,7 +14,7 @@ export const userRegister = async (req,res) =>{
     const depassword = await bcrypt.hash(password,10);
     user = await User.create({email, name, username, password:depassword});
 
-    const token = jwt.sign({_id: user._id}, "hjdfkhdshdsdkhah");
+    const token = jwt.sign({_id: user._id}, process.env.SECRATE_TOKEN);
    
     res.status(200).cookie("token", token).json({
         success: true,
@@ -41,7 +41,7 @@ export const userLogin = async(req,res) =>{
     })
    }
 
-   const token = jwt.sign({_id: user._id}, "hjdfkhdshdsdkhah");
+   const token = jwt.sign({_id: user._id}, process.env.SECRATE_TOKEN);
    res.cookie("token",token, {
     httpOnly: true,
    }).status(200).json({

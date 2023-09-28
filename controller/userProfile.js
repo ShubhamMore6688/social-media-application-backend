@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 export const getUserProfile = async (req,res) => {
     const {token} = req.cookies;
 
-    const decoded = jwt.verify(token, "hjdfkhdshdsdkhah");
+    const decoded = jwt.verify(token, process.env.SECRATE_TOKEN);
     const userprofile = await UserProfile.findOne({user: decoded._id});
 
     if(!userprofile){
@@ -38,7 +38,7 @@ export const createUserProfile = async (req,res) =>{
         })
     }
 
-    const decoded = jwt.verify(token, "hjdfkhdshdsdkhah" );
+    const decoded = jwt.verify(token, process.env.SECRATE_TOKEN );
     const user = await User.findById({_id: decoded._id});
 
     const userprofile = await UserProfile.create({
@@ -64,7 +64,7 @@ export const updateUserProfile = async(req,res) =>{
             message: "Login first"
         })
     }
-    const decoded = jwt.verify(token, "hjdfkhdshdsdkhah" )
+    const decoded = jwt.verify(token, process.env.SECRATE_TOKEN )
     const userprofile = await UserProfile.findOneAndUpdate(
         {user: decoded._id}, 
         {bio, profilePicture}, 

@@ -11,7 +11,7 @@ export const userToFollow = async(req,res) =>{
         })
     }
     const usertofollow = await User.findById({_id: userid});
-    const decoded = jwt.verify(token, "hjdfkhdshdsdkhah");
+    const decoded = jwt.verify(token, process.env.SECRATE_TOKEN);
     const currentuser = await User.findById({_id: decoded._id});
 
 
@@ -54,7 +54,7 @@ export const userToUnfollow = async (req,res) =>{
     }
 
     const usertounfollow = await User.findById({_id: userid});
-    const decoded = jwt.verify(token,  "hjdfkhdshdsdkhah");
+    const decoded = jwt.verify(token,  process.env.SECRATE_TOKEN);
     const currentuser = await User.findById({_id:decoded._id});
     
     
